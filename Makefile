@@ -1,5 +1,3 @@
-include .env
-
 PROJECT_NAME:=llm
 
 LOCAL_DATASETS := $(PWD)/datasets
@@ -37,3 +35,6 @@ mypy:
 
 bandit:
 	$(DOCKER_RUN) -v $(PWD):/app -w /app cytopia/bandit:latest $(PACKAGE_NAME) tests
+
+env-create:
+	conda env create -n llm-lstm --file environment.yml
