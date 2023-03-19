@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm"
+description = "Simple Language Model"
+readme = "README.md"
+authors = [
+    { name = "Eduardo", email = "emdemor@gmail.com" }
+]
+license = { file = "LICENSE" }
+classifiers = [
+    "Environment :: Console",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: Portuguese (Brazilian)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Utilities",
+]
+keywords = ["nlp", "llm"]
+requires-python = ">=3.9"
+dynamic = ["dependencies", "version"]
+
+[tool.setuptools]
+packages = ["llm"]
+
+[tool.setuptools.dynamic]
+version = {attr = "llm.__version__"}
+dependencies = {file = ["requirements.txt"]}
+
+[project.scripts]
+llmrun = "llm.__main__:main"
