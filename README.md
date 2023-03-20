@@ -22,14 +22,21 @@ Como estamos utilizando uma rede neural recorrente, é esperado que o modelo per
 1. Clone este repositório em sua máquina local:
 
 ```bash
-git clone https://github.com/emdemor/News-of-the-Brazilian-Newspaper.git
+git clone https://github.com/emdemor/news-title-generator.git
 ```
 
 
-2. Instale as bibliotecas necessárias:
+2. Crie um ambiente virtual
 
 ```bash
-pip install -r requirements.txt
+virtualenv venv
+source venv/bin/activate
+```
+
+3. Configure o ambiente
+
+```bash
+make build
 ```
 
 ### Treinamento do modelo
@@ -37,16 +44,18 @@ pip install -r requirements.txt
 Para treinar o modelo, execute o seguinte comando na linha de comando:
 
 ```bash
-python train.py
+make train sample=1000
 ```
 
+onde `sample` será o número de notícias que será utilizada para treinar o Word2Vec. 
 
-### Execução do modelo
+
+### Execução do modelo (Não implementado)
 
 Para gerar um título para uma notícia específica, utilize o seguinte comando:
 
 ```bash
-python predict.py --text "corpo da notícia"
+make predict text="corpo da notícia"
 ```
 
 
