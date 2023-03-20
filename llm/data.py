@@ -11,7 +11,7 @@ from llm.tokenize import SentencesTokenizer
 
 
 def load_corpus(
-    force_download: bool = False, sample: Union[str, int] = None
+    force_download: bool = False, sample: Union[str, None] = None
 ) -> Tuple[List[str]]:
     if (not os.path.exists(config.CORPUS_LOCAL_PATH)) or force_download:
         logger.info("Downloading corpus")
@@ -26,14 +26,18 @@ def load_corpus(
     df = _get_news()
 
     if isinstance(sample, str):
-        if sample != "full":
-            raise ValueError(
-                f"Value '{sample}' not recognized. Set 'sample=full' to use all the news"
-                "or pass a integer corresponding the number of news you want to "
-                "use on embedding trainnig."
-            )
-        else:
-            sample = None
+        try: 
+            sample = int(sample)
+
+        except ValueError:
+            if sample != "full":
+                raise ValueError(
+                    f"Value '{sample}' not recognized. Set 'sample=full' to use all the news"
+                    "or pass a integer corresponding the number of news you want to "
+                    "use on embedding trainnig."
+                )
+            else:
+                sample = None
 
     if sample is not None:
         logger.debug(f"Using a sample of size {sample}")
