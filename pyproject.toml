@@ -32,4 +32,4 @@ version = {attr = "llm.__version__"}
 dependencies = {file = ["requirements.txt"]}
 
 [project.scripts]
-llmrun = "llm.__main__:main"
+llm-train = "llm.__main__:train"
