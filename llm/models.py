@@ -1,7 +1,11 @@
+from ast import Tuple
 import os
+from typing import List
 
 from basix import files
 import numpy as np
+from loguru import logger
+from tqdm import tqdm
 
 from llm.config import config
 from llm.embed import CBOWEmbedder
@@ -9,9 +13,10 @@ from llm.tokenize import SentencesTokenizer
 
 
 class TextProcesser:
-    def __init__(self):
+    def __init__(self, verbose=0):
         self.tokenizer = load_tokenizer()
         self.embedder = load_embedder()
+        self.verbose = verbose
 
     def tokenize(self, sentences):
         return self.tokenizer.encode(sentences)
@@ -22,13 +27,31 @@ class TextProcesser:
     def get_vectors(self, sentences_tokens):
         return [
             np.array([self.embedder.get_vector(token) for token in sent_tokens])
-            for sent_tokens in sentences_tokens
+            for sent_tokens in self._get_iterator(sentences_tokens)
         ]
 
     def transform(self, sentences):
+        logger.debug("Tokenizing sentences")
         tokens = self.tokenize(sentences)
+        logger.debug("Getting embedding vectors")
         embeddings = self.get_vectors(tokens)
         return embeddings
+    
+    def get_most_similar_token(self, vector:np.array) -> str:
+        return self.embedder.wv.similar_by_vector(vector,1)[0][0]
+    
+    def get_tokens_from_vectors(self, vectors) -> List[List[str]]:
+
+        if isinstance(vectors, np.ndarray):
+            vectors = [vectors]
+
+        return [[self.get_most_similar_token(vector) for vector in sent_vector] for sent_vector in vectors]
+    
+    def _get_iterator(self, iterator):
+        if self.verbose == 0:
+            return iterator
+        else:
+            return tqdm(iterator)
 
 
 def train_embedding(sentences):
