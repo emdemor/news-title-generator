@@ -1,4 +1,5 @@
 from __future__ import annotations
+from typing import List
 
 from nltk import tokenize
 from bpemb import BPEmb
@@ -16,6 +17,13 @@ class SentencesTokenizer:
         self.tokenizer_level = tokenizer_level
         self.lang = lang
         self._tokenizer = self._set_tokenizer()
+
+    
+    def encode(self, text_list: List[str]):
+        if isinstance(text_list, str):
+            text_list = [text_list]
+
+        return [self._tokenizer(text.lower()) for text in text_list]
 
     def encode_sentences(self, text_list):
         if isinstance(text_list, str):
