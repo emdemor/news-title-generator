@@ -16,7 +16,7 @@ def train_embedding(sentences):
         .save(config.TOKENIZER_LOCAL_PATH)
     )
     
-    sent_tokens = sent_tokenizer.encode(sentences)
+    sent_tokens = sent_tokenizer.encode_sentences(sentences)
 
     embedder = (
         CBOWEmbedder(

@@ -57,8 +57,8 @@ def load_corpus(
 def tokenize_text_and_title_sentences(
     sent_tokenizer: SentencesTokenizer, texts: List[str], titles: List[str]
 ) -> List[List[str]]:
-    text_sent_tokens = sent_tokenizer.encode(texts)
-    title_sent_tokens = sent_tokenizer.encode(titles)
+    text_sent_tokens = sent_tokenizer.encode_sentences(texts)
+    title_sent_tokens = sent_tokenizer.encode_sentences(titles)
     sent_tokens = text_sent_tokens + title_sent_tokens
     return sent_tokens
 

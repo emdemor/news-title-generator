@@ -17,7 +17,7 @@ class SentencesTokenizer:
         self.lang = lang
         self._tokenizer = self._set_tokenizer()
 
-    def encode(self, text_list):
+    def encode_sentences(self, text_list):
         if isinstance(text_list, str):
             text_list = [text_list]
 
@@ -39,17 +39,7 @@ class SentencesTokenizer:
         return load_bin(path)
 
     def _set_tokenizer(self):
-        if self.tokenizer_level == "word":
-            return self._get_word_tokenizer()
-
-        elif self.tokenizer_level == "subword":
-            return self._get_bpemp_tokenizer(self.lang)
-
-        raise Exception(f"Level {self.tokenizer_level} not recognized. Use 'word' or 'subword'.")
-
-    def _get_word_tokenizer(self):
-        self._bpemb = None
-        return tokenize.word_tokenize
+        return self._get_bpemp_tokenizer(self.lang)
 
     def _get_bpemp_tokenizer(self, lang):
         if lang == "portuguese":
