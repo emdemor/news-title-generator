@@ -7,7 +7,7 @@ from pydantic import BaseSettings
 class GlobalConfig(BaseSettings):
     DATASET_PATH: str = "datasets"
     MODEL_PATH: str = "models"
-    MODEL_VERSION: str = "0.0.1dev1"
+    MODEL_VERSION: str = "0.1.0"
     DATASET_RAW_PATH: str = os.path.join(DATASET_PATH, "raw")
     DATASET_INTERIM_PATH: str = os.path.join(DATASET_PATH, "interim")
     CORPUS_URL: str = "https://github.com/emdemor/News-of-the-Brazilian-Newspaper/blob/main/data/brazilian-news.parquet?raw=true"
