@@ -167,7 +167,7 @@ class CBOWEmbedder(gensim.models.Word2Vec):
             return self.wv.get_vector(key, norm)
 
         except KeyError as exception:
-            logger.warning(f"Returning OOV token: {self.OOV_TOKEN}. " + str(exception))
+            #logger.warning(f"Returning OOV token: {self.OOV_TOKEN}. " + str(exception))
             return self.wv.get_vector(self.OOV_TOKEN, norm)
 
     def _validate_oov(self):
