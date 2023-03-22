@@ -16,11 +16,11 @@ def get_embedder():
 
 
 class CBOWEmbedder(gensim.models.Word2Vec):
-    OOV_TOKEN = "<oov>"
-    PADDING_TOKEN = "<pad>"
-    BOS_TOKEN = "<s>"
-    EOS_TOKEN = "</s>"
-    LP_TOKEN = "<lang>"
+    OOV_TOKEN = "~"
+    PADDING_TOKEN = "Ø"
+    BOS_TOKEN = "▁«"
+    EOS_TOKEN = "▁»"
+    LP_TOKEN = "¤"
 
     def fit(
         self,
