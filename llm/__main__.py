@@ -13,6 +13,8 @@ from llm import data, models
 
 def train(sample: str):
     texts, titles = data.load_corpus(sample=sample)
+    texts = models.add_sentences_bounders(texts)
+    titles = models.add_sentences_bounders(titles)
     models.train_embedding(texts + titles)
     embedder = models.load_embedder()
 
