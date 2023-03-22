@@ -16,11 +16,11 @@ def get_embedder():
 
 
 class CBOWEmbedder(gensim.models.Word2Vec):
-    OOV_TOKEN = "<oov>"
-    PADDING_TOKEN = "<pad>"
-    BOS_TOKEN = "<s>"
-    EOS_TOKEN = "</s>"
-    LP_TOKEN = "<lang>"
+    OOV_TOKEN = "~"
+    PADDING_TOKEN = "Ø"
+    BOS_TOKEN = "▁«"
+    EOS_TOKEN = "▁»"
+    LP_TOKEN = "¤"
 
     def fit(
         self,
@@ -167,7 +167,7 @@ class CBOWEmbedder(gensim.models.Word2Vec):
             return self.wv.get_vector(key, norm)
 
         except KeyError as exception:
-            logger.warning(f"Returning OOV token: {self.OOV_TOKEN}. " + str(exception))
+            #logger.warning(f"Returning OOV token: {self.OOV_TOKEN}. " + str(exception))
             return self.wv.get_vector(self.OOV_TOKEN, norm)
 
     def _validate_oov(self):
