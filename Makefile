@@ -15,3 +15,6 @@ else
 	@echo "Ative o ambiente virtual correto e execute novamente."
 	@exit 1
 endif
+
+black:
+	black --line-length 110 $(filter-out $@,$(MAKECMDGOALS))

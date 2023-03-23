@@ -18,7 +18,6 @@ class SentencesTokenizer:
         self.lang = lang
         self._tokenizer = self._set_tokenizer()
 
-    
     def encode(self, text_list: List[str]):
         if isinstance(text_list, str):
             text_list = [text_list]
@@ -35,12 +34,10 @@ class SentencesTokenizer:
             data.append([j.lower() for j in self._tokenizer(i)])
         return data
 
-
     def save(self, path: str = config.TOKENIZER_LOCAL_PATH) -> None:
         logger.debug(f"Saving object {self.__class__.__name__} to {path}")
         save_bin(self, path)
         return self
-
 
     @classmethod
     def load(cls, path: str = config.TOKENIZER_LOCAL_PATH) -> SentencesTokenizer:

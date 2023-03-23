@@ -10,23 +10,18 @@ from llm.config import config, logger
 from llm.tokenize import SentencesTokenizer
 
 
-def load_corpus(
-    force_download: bool = False, sample: Union[str, None] = None
-) -> Tuple[List[str]]:
+def load_corpus(force_download: bool = False, sample: Union[str, None] = None) -> Tuple[List[str]]:
     if (not os.path.exists(config.CORPUS_LOCAL_PATH)) or force_download:
         logger.info("Downloading corpus")
         _download_corpus()
     else:
-        logger.debug(
-            f"Corpus already exists in {config.CORPUS_LOCAL_PATH}. Skipping "
-            "downloading corpus."
-        )
+        logger.debug(f"Corpus already exists in {config.CORPUS_LOCAL_PATH}. Skipping " "downloading corpus.")
 
     logger.debug(f"Importing news from {config.CORPUS_LOCAL_PATH}")
     df = _get_news()
 
     if isinstance(sample, str):
-        try: 
+        try:
             sample = int(sample)
 
         except ValueError:
