@@ -32,18 +32,16 @@ class TextProcesser:
         ]
 
     def transform(
-        self,
-        sentences,
-        add_bos=False,
-        add_eos=False,
-        padding="post",
-        dtype="float32",
-        maxlen=None,
+        self, sentences, add_bos=False, add_eos=False, padding="post", dtype="float32", maxlen=None
     ) -> np.ndarray:
         logger.debug("Tokenizing sentences")
         tokens = self.tokenize(sentences)
 
-        titles_tokens_input = [[CBOWEmbedder.BOS_TOKEN] + sent_tokens for sent_tokens in titles_tokens]
+        if add_bos:
+            tokens = self._add_bos(tokens)
+
+        if add_eos:
+            tokens = self._add_eos(tokens)
 
         logger.debug("Getting embedding vectors")
         embeddings = self.get_vectors(tokens)
@@ -122,6 +120,3 @@ def load_w2v(path: str = config.W2V_LOCAL_PATH):
             f"Word2Vec binary not found in {path}. Experiment pass other path " "or training the model again."
         )
 
-
-def add_sentences_bounders(sent_list: List[str]):
-    return [CBOWEmbedder.BOS_TOKEN + " " + x + " " + CBOWEmbedder.EOS_TOKEN for x in sent_list]
