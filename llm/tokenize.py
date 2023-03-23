@@ -54,5 +54,5 @@ class SentencesTokenizer:
                 f"Language {lang} not allowed for BPEmb tokenizer. "
                 f"Allowed languages are: {self.allowed_languages}"
             )
-        self._bpemb = BPEmb(lang=_lang, vs=config.BPEMB_VS, dim=config.BPEM_DIM)
+        self._bpemb = BPEmb(lang=_lang, vs=config.BPEMB_VS, dim=config.BPEMB_DIM)
         return self._bpemb.encode
