@@ -19,10 +19,20 @@ class GlobalConfig(BaseSettings):
     TOKENIZER_LOCAL_PATH: str = os.path.join(MODEL_PATH, f"version={MODEL_VERSION}", "tokenizer.bin")
     EMBEDDER_LOCAL_PATH: str = os.path.join(MODEL_PATH, f"version={MODEL_VERSION}", "embedder.bin")
     W2V_LOCAL_PATH: str = os.path.join(MODEL_PATH, f"version={MODEL_VERSION}", "w2v.bin")
+
+    CBOW_MIN_COUNT: int = 10
+    CBOW_VECTOR_SIZE: int = 50
+    CBOW_WIDOWS: int = 5
+    CBOW_ALPHA: float = 0.025
+    CBOW_MIN_ALPHA: float = 0.0001
+    CBOW_COMPUTE_LOSS: bool = True
+    CBOW_FIT_EPOCHS: int = 100
+    CBOW_FIT_WORD_COUNT: int = 0
+    CBOW_FIT_START_ALPHA: int = None
+    CBOW_FIT_END_ALPHA: int = None
+
     BPEMB_VS: int = 200000
-    BPEM_DIM: int = 300
-    MODEL_DIMENSION: int = 100
-    CBOW_WINDOW: int = 5
+    BPEMB_DIM: int = 300
 
     class Config:
         env_file: str = ".env"
