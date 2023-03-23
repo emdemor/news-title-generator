@@ -1,4 +1,7 @@
 notebooks/data/*
+notebooks/*
+!notebooks/*.ipynb
+
 .vscode/
 datasets/*
 models/*

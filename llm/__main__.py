@@ -2,6 +2,7 @@ import click
 
 from llm import data, models
 
+
 @click.command()
 @click.option(
     "-s",
@@ -10,7 +11,6 @@ from llm import data, models
     type=str,
     required=True,
 )
-
 def train(sample: str):
     texts, titles = data.load_corpus(sample=sample)
     texts = models.add_sentences_bounders(texts)

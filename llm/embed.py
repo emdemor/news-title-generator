@@ -167,7 +167,7 @@ class CBOWEmbedder(gensim.models.Word2Vec):
             return self.wv.get_vector(key, norm)
 
         except KeyError as exception:
-            #logger.warning(f"Returning OOV token: {self.OOV_TOKEN}. " + str(exception))
+            # logger.warning(f"Returning OOV token: {self.OOV_TOKEN}. " + str(exception))
             return self.wv.get_vector(self.OOV_TOKEN, norm)
 
     def _validate_oov(self):
@@ -178,23 +178,19 @@ class CBOWEmbedder(gensim.models.Word2Vec):
                 "min_count."
             )
 
-
     def save(self, path: str = config.EMBEDDER_LOCAL_PATH) -> None:
         logger.debug(f"Saving object {self.__class__.__name__} to {path}")
         save_bin(self, path)
         return self
-
 
     def save_w2v(self, path: str = config.W2V_LOCAL_PATH) -> None:
         logger.debug(f"Saving object {self.wv.__class__.__name__} to {path}")
         self.wv.save(path)
         return self
 
-
     @classmethod
     def load(cls, path: str = config.EMBEDDER_LOCAL_PATH) -> CBOWEmbedder:
         return load_bin(path)
-
 
     @classmethod
     def load_w2v(cls, path: str = config.W2V_LOCAL_PATH) -> gensim.models.KeyedVectors:
