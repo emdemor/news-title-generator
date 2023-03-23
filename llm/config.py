@@ -21,7 +21,7 @@ class GlobalConfig(BaseSettings):
     W2V_LOCAL_PATH: str = os.path.join(MODEL_PATH, f"version={MODEL_VERSION}", "w2v.bin")
 
     CBOW_MIN_COUNT: int = 10
-    CBOW_VECTOR_SIZE: int = 50
+    CBOW_VECTOR_SIZE: int = 100
     CBOW_WIDOWS: int = 5
     CBOW_ALPHA: float = 0.025
     CBOW_MIN_ALPHA: float = 0.0001
