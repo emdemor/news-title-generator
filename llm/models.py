@@ -126,3 +126,7 @@ def load_w2v(path: str = config.W2V_LOCAL_PATH):
         raise FileNotFoundError(
             f"Word2Vec binary not found in {path}. Experiment pass other path " "or training the model again."
         )
+
+
+def add_sentences_bounders(sent_list: List[str]):
+    return [CBOWEmbedder.BOS_TOKEN+" "+x+" "+CBOWEmbedder.EOS_TOKEN for x in sent_list]
