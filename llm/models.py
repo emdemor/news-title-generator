@@ -71,6 +71,7 @@ class TextProcesser:
 
 
 def train_embedding(sentences):
+    
     files.make_directory(config.MODEL_PATH)
 
     sent_tokenizer = SentencesTokenizer(
@@ -81,14 +82,20 @@ def train_embedding(sentences):
 
     embedder = (
         CBOWEmbedder(
-            min_count=10,
-            vector_size=50,
-            window=5,
-            alpha=0.025,
-            min_alpha=0.0001,
-            compute_loss=True,
+            min_count=config.CBOW_MIN_COUNT,
+            vector_size=config.CBOW_VECTOR_SIZE,
+            window=config.CBOW_WIDOWS,
+            alpha=config.CBOW_ALPHA,
+            min_alpha=config.CBOW_MIN_ALPHA,
+            compute_loss=config.CBOW_COMPUTE_LOSS,
         )
-        .fit(sent_tokens, total_examples=len(sent_tokens), epochs=100, compute_loss=True)
+        .fit(
+            sent_tokens,
+            total_examples=len(sent_tokens),
+            epochs=config.CBOW_FIT_EPOCHS,
+            compute_loss=config.CBOW_COMPUTE_LOSS,
+            word_count=config.CBOW_FIT_WORD_COUNT,
+        )
         .save(config.EMBEDDER_LOCAL_PATH)
         .save_w2v(config.W2V_LOCAL_PATH)
     )
@@ -119,4 +126,3 @@ def load_w2v(path: str = config.W2V_LOCAL_PATH):
         raise FileNotFoundError(
             f"Word2Vec binary not found in {path}. Experiment pass other path " "or training the model again."
         )
-
