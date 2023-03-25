@@ -1,0 +1,5 @@
+[core]
+    remote = news
+    autostage = true
+['remote "news"']
+    url = gdrive://1UemPXy5734ocaCy0BTJUy-2gGWftTcfE
